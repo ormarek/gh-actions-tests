@@ -24,6 +24,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
     steps:
       - name: Hello world
-        run: echo "Hello world"
+        run: echo ${{ github.ref}}
       - name: Is new?
         run: echo ${{ github.event.inputs.new }}
