@@ -23,7 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
     steps:
+      - name: Set Ref
+        if: ${{ github.event_name == 'workflow_run' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
       - name: Hello world
-        run: echo ${{ github.ref}}
+        run: echo ${{ github.ref }}
       - name: Is new?
         run: echo ${{ github.event.inputs.new }}
