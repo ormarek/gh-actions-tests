@@ -1,0 +1,35 @@
+name: Main
+on:
+  workflow_dispatch:
+    inputs:
+      new:
+        type: boolean
+        description: "Is first deployment?"
+        required: false
+        default: false
+  workflow_run:
+    workflows: ["Deploy Feature Branch"]
+    types:
+      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
+    steps:
+      - name: Hello world
+        run: echo "Hello world"
+      - name: Is new?
+        run: echo ${{ github.event.inputs.new }}

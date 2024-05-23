@@ -1,0 +1,14 @@
+name: Deploy Feature Branch
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: echo "Deployment workflow for feature branch will now begin"
+      - name: Stop
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "Deployment can only be triggered from a feature branch"
