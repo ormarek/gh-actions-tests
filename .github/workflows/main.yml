@@ -31,7 +31,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     steps:
       - name: Set Ref
-        if: ${{ github.event_name == 'workflow_run' }}
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
