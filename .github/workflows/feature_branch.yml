@@ -11,4 +11,6 @@ jobs:
         run: echo "Deployment workflow for feature branch will now begin"
       - name: Stop
         if: ${{ github.ref == 'refs/heads/main' }}
-        run: echo "Deployment can only be triggered from a feature branch"
+        run: |
+          echo "Deployment can only be triggered from a feature branch"
+          exit 1
