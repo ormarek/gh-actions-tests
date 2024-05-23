@@ -29,6 +29,6 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Hello world
-        run: echo ${{ github.ref }}
+        run: cat README.md
       - name: Is new?
         run: echo ${{ github.event.inputs.new }}
