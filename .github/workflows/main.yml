@@ -19,9 +19,16 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' }}
+    steps:
+      - name: Hello world
+        run: echo "Hello world"
+
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
+    if: ${{ github.ref == 'refs/heads/main' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     steps:
       - name: Set Ref
         if: ${{ github.event_name == 'workflow_run' }}
